@@ -20,8 +20,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-//app.use('/api/deliveries', require('./routes/deliveryRoutes'));
-//app.use('/api/drivers', require('./routes/driverRoutes'));
+app.use('/api/deliveries', require('./routes/deliveryRoutes'));
+app.use('/api/drivers', require('./routes/driverRoutes'));
 
 // Socket.io
 io.on('connection', (socket) => {
