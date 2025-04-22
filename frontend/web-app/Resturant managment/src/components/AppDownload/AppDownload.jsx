@@ -4,11 +4,11 @@ import './AppDownload.css'
 const AppDownload = () => {
   return (
     <div className='app-download' id='app-download'>
-<<<<<<< Updated upstream
+
         <p>For Better Experience Download <br/>Bojun App</p>
-=======
-        <p>For Better Experience Download <br/>Tomato App</p>
->>>>>>> Stashed changes
+
+        
+
         <div className='app-download-platforms'>
             <img src={assets.play_store} alt="" />
             <img src={assets.app_store} alt="" />
