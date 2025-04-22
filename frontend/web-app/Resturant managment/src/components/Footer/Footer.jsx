@@ -1,52 +1,44 @@
-import React from "react";
-import "./Footer.css";
-import { assets } from "../../assets/frontend_assets/assets";
+import { assets } from '../../assets/assets'
+import './Footer.css'
 
 const Footer = () => {
   return (
-    <div className="footer" id="footer">
-      <div className="footer-content">
-        <div className="footer-content-left">
-        <img src={assets.logo} alt="logo" className="footer-logo" />
+    <div className='footer' id='footer'>
+      <div className='footer-content'>
+        <div className='footer-content-left'>
+          <div className='footer-logo-wrapper'>
+            <img src={assets.logo} alt='Bojrn Logo' className='footer-logo' />
+          </div>
           <p>
-          Bojun is a premium food delivery platform committed to bringing authentic, 
-          flavorful meals from your favorite restaurants straight to your doorstep. 
-          Rooted in the rich culinary heritage of Sri Lanka, Bojun blends tradition with 
-          technology to offer a seamless, fast, and reliable food delivery experience.
-          Whether you're craving local classics or international cuisine, Bojun ensures every dish 
-          arrives fresh, delicious, and right on time. With a focus on quality, convenience, and customer
-          satisfaction, Bojun is more than just a delivery app — it’s your trusted partner in every
-          mealtime moment.
+            <br></br>
+            <strong>Explore the flavors of Bojun </strong> – where every dish is crafted to satisfy. From fresh greens to indulgent treats, we bring deliciousness right to your door, pure veg and always premium.
           </p>
-          <div className="footer-social-icons">
-            <img src={assets.facebook_icon} alt="" />
-            <img src={assets.twitter_icon} alt="" />
-            <img src={assets.linkedin_icon} alt="" />
+          <div className='footer-social-icons'>
+            <img src={assets.facebook_icon} alt="Facebook" />
+            <img src={assets.twitter_icon} alt="Twitter" />
+            <img src={assets.linkedin_icon} alt="LinkedIn"/>
           </div>
         </div>
-        <div className="footer-content-center">
-          <h2>Company</h2>
-          <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Delivery</li>
-            <li>Privacy Policy</li>
-          </ul>
+        <div className='footer-content-center'>
+          <h2>COMPANY</h2>
+          <li>Home</li>
+          <li>About us</li>
+          <li>Delivery</li>
+          <li>Privacy policy</li>
         </div>
-        <div className="footer-content-right">
-          <h2>Get in touch</h2>
+        <div className='footer-content-right'>
           <ul>
-            <li>+94715674543</li>
-            <li>info@bojun.lk</li>
+            <li>+94716787443</li>
+            <li>Bojun@gmail.lk</li>
           </ul>
         </div>
       </div>
-      <hr />
-      <p className="footer-copyright">
-        Copyright 2025 @ Bojun.lk - All Right Reserved.
+      <hr/>
+      <p className='footer-copyright'>
+        Copyright 2025 © Bojun - All Rights Reserved.
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
