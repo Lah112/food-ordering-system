@@ -81,7 +81,11 @@ const Add = ({url}) => {
                 </div>
                 <div className='add-price flex-col'>
                     <p>Product Price</p>
+<<<<<<< Updated upstream
                     <input onChange={onChangeHandler} value={data.price} type='number' name='price' placeholder='Rs100'/>
+=======
+                    <input onChange={onChangeHandler} value={data.price} type='number' name='price' placeholder='₹50'/>
+>>>>>>> Stashed changes
                 </div>
             </div>
             <button type='submit' className='add-btn'>ADD</button>
