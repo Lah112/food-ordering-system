@@ -171,7 +171,7 @@ const PlaceOrder = () => {
         </div>
       </div>
     </form>
-  );
+  ); 
 };
 
 export default PlaceOrder;
