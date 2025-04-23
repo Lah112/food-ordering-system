@@ -10,10 +10,12 @@ import Verify from './pages/Verify/Verify.jsx'
 import MyOrders from './pages/MyOrders/MyOrders.jsx'
 import SearchResults from './components/Navbar/SearchResults.jsx' // ✅ Import here
 
+
+
 const App = () => {
 
   const [showLogin, setShowLogin] = useState(false)
-
+    
   return (
     <>
       {showLogin && <LoginPopUp setShowLogin={setShowLogin} />}
@@ -26,6 +28,8 @@ const App = () => {
           <Route path='/verify' element={<Verify />} />
           <Route path='/myorders' element={<MyOrders />} />
           <Route path='/search' element={<SearchResults />} /> {/* ✅ Add this route */}
+          
+
         </Routes>
       </div>
       <Footer />

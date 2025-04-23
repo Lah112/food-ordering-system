@@ -48,6 +48,37 @@
     font-weight: 500;
 }
 
+/* Sub-options container */
+.sidebar-sub-options {
+    margin-left: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Sub-option style */
+.sidebar-sub-option {
+    color: #bbb;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-sub-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.sidebar-sub-option.active {
+    background-color: #2c2f36;
+    color: #fff;
+    font-weight: 500;
+    border-left: 2px solid #ff6347;
+    padding-left: 8px;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .sidebar {
@@ -61,5 +92,16 @@
     .sidebar-option {
         justify-content: center;
         padding: 10px;
+    }
+
+    .sidebar-sub-options {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .sidebar-sub-option {
+        font-size: 0;
+        padding: 8px;
+        text-align: center;
     }
 }
