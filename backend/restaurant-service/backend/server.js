@@ -5,16 +5,19 @@ import foodRouter from "./routes/foodRoute.js"
 import userRouter from "./routes/userRoute.js"
 import dotenv from 'dotenv';
 dotenv.config();
+import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
+import adminRoutes from './routes/adminRoutes.js';
 
 // app config
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080 || 4000
 
 // middleware
 app.use(express.json())
 app.use(cors());
+app.use('/api/admin', adminRoutes);
 
 // db connection
 connectDB();
