@@ -1,0 +1,61 @@
+.checkout-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #32325d;
+    margin-bottom: 30px;
+  }
+  
+  .order-summary {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+  
+  .order-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .order-items th, .order-items td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .order-items th {
+    background-color: #f1f1f1;
+  }
+  
+  .back-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+  
+  .error {
+    color: #dc3545;
+  }
