@@ -1,21 +1,20 @@
 /* eslint-disable react/jsx-key */
 import { useContext, useState } from 'react'
 import './Cart.css'
-import {StoreContext} from '../../context/StoreContext'
+import { StoreContext } from '../../context/StoreContext'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-
   const navigate = useNavigate();
 
-  const {cartItems, food_list, removeFromCart, getTotalCartAmount, discount, setDiscount, url} = useContext(StoreContext);
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, discount, setDiscount, url } = useContext(StoreContext);
 
-  const deliveryCost =  getTotalCartAmount() === 0 ? 0 :
-                        getTotalCartAmount() <= 100 ? 70 :
-                        getTotalCartAmount() <= 180 ? 60 :
-                        getTotalCartAmount() <= 250 ? 50 :
-                        getTotalCartAmount() <= 320 ? 40 :
-                        30;
+  const deliveryCost = getTotalCartAmount() === 0 ? 0 :
+    getTotalCartAmount() <= 100 ? 70 :
+      getTotalCartAmount() <= 180 ? 60 :
+        getTotalCartAmount() <= 250 ? 50 :
+          getTotalCartAmount() <= 320 ? 40 :
+            30;
 
   const promoCodes = {
     'SAVE25': 25,
@@ -24,13 +23,13 @@ const Cart = () => {
   };
 
   const [promoCode, setPromoCode] = useState('');
-  
+
   const handleChange = (e) => {
     setPromoCode(e.target.value);
   };
-  
+
   const handleSubmit = () => {
-    if (getTotalCartAmount()===0) {
+    if (getTotalCartAmount() === 0) {
       alert('Select some items from Menu to proceed.')
     }
     else if (promoCodes[promoCode]) {
@@ -51,24 +50,25 @@ const Cart = () => {
           <p>Total</p>
           <p>Remove</p>
         </div>
-        <br/>
-        <hr/>
-        {food_list.map((item)=>{
-          if(cartItems[item._id]>0){
-            return(
-              <div>
+        <br />
+        <hr />
+        {food_list.map((item) => {
+          if (cartItems[item._id] > 0) {
+            return (
+              <div key={item._id}>
                 <div className='cart-items-title cart-items-item'>
-                <img src={url+"/images/"+item.image} alt=''/>
-                <p>{item.name}</p>
-                <p>Rs.{item.price}</p>
-                <p>{cartItems[item._id]}</p>
-                <p>Rs.{item.price * cartItems[item._id]}</p>
-                <p onClick={()=>removeFromCart(item._id)} className='cross'>x</p>
-              </div>
-              <hr/>
+                  <img src={url + "/images/" + item.image} alt='' />
+                  <p>{item.name}</p>
+                  <p>Rs.{item.price}</p>
+                  <p>{cartItems[item._id]}</p>
+                  <p>Rs.{item.price * cartItems[item._id]}</p>
+                  <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
+                </div>
+                <hr />
               </div>
             )
           }
+          return null; // Ensure we don't return undefined or null items.
         })}
       </div>
       <div className='cart-bottom'>
@@ -79,29 +79,29 @@ const Cart = () => {
               <p>Subtotal</p>
               <p>Rs.{getTotalCartAmount()}</p>
             </div>
-            <hr/>
+            <hr />
             <div className='cart-total-details'>
               <p>Delivery Fee</p>
               <p>Rs.{deliveryCost}</p>
             </div>
-            <hr/>
+            <hr />
             <div className='cart-total-details'>
               <p>Discount</p>
               <p>Rs.{discount}</p>
             </div>
-            <hr/>
+            <hr />
             <div className='cart-total-details'>
               <p>Total</p>
-              <p>Rs.{getTotalCartAmount()===0? 0: getTotalCartAmount()+deliveryCost-discount}</p>
+              <p>Rs.{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + deliveryCost - discount}</p>
             </div>
           </div>
-          <button onClick={()=>navigate('/order')}>PROCEED TO CHECKOUT</button>
+          <button onClick={() => navigate('/order')}>PROCEED TO CHECKOUT</button>
         </div>
         <div className='cart-promocode'>
           <div>
             <p>Have a Promo Code?</p>
             <div className='cart-promocode-input'>
-              <input type='text' placeholder='Promo Code' value={promoCode} onChange={handleChange}/>
+              <input type='text' placeholder='Promo Code' value={promoCode} onChange={handleChange} />
               <button onClick={handleSubmit}>SUBMIT</button>
             </div>
           </div>
@@ -111,4 +111,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Cart;
