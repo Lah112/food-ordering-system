@@ -10,6 +10,7 @@ import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 import adminRoutes from './routes/adminRoutes.js';
 
+
 // app config
 const app = express()
 const port = process.env.PORT || 8080 || 4000
@@ -18,6 +19,7 @@ const port = process.env.PORT || 8080 || 4000
 app.use(express.json())
 app.use(cors());
 app.use('/api/admin', adminRoutes);
+
 
 // db connection
 connectDB();
