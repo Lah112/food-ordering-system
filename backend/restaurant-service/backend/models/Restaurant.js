@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 
 const restaurantSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  address: String,
-  phone: String,
+  name: { type: String, required: true },
   ownerName: String,
+  email: String,
+  phone: String,
+  address: String,
+  cuisineType: String,
+  isApproved: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 });
 
