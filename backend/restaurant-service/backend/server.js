@@ -9,6 +9,7 @@ import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 import adminRoutes from './routes/adminRoutes.js';
+import restaurantRoutes from './routes/restaurantRoutes.js';
 
 
 // app config
@@ -19,6 +20,7 @@ const port = process.env.PORT || 8080 || 4000
 app.use(express.json())
 app.use(cors());
 app.use('/api/admin', adminRoutes);
+app.use('/api/restaurants', restaurantRoutes);
 
 
 // db connection

@@ -12,6 +12,7 @@ import SearchResults from './components/Navbar/SearchResults.jsx' // ✅ Import 
 
 
 
+
 const App = () => {
 
   const [showLogin, setShowLogin] = useState(false)
@@ -28,11 +29,7 @@ const App = () => {
           <Route path='/verify' element={<Verify />} />
           <Route path='/myorders' element={<MyOrders />} />
           <Route path='/search' element={<SearchResults />} /> 
-         
-          
-          
-
-        </Routes>
+         </Routes>
       </div>
       <Footer />
     </>
