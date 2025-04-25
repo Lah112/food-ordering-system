@@ -1,0 +1,183 @@
+/* General Container */
+.view-restaurants-container {
+    padding: 3rem;
+    max-width: 1200px;
+    margin: auto;
+    font-family: 'Inter', sans-serif;
+    color: #1e1e1e;
+    background: #f9fafb;
+    border-radius: 12px;
+}
+
+.view-restaurants-container h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #1a202c;
+    text-align: center;
+}
+
+/* Restaurant List */
+.restaurants-list {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Restaurant Card */
+.restaurant-card {
+    background: #ffffff;
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.restaurant-card p {
+    font-size: 1rem;
+    color: #4b5563;
+    margin: 0.5rem 0;
+}
+
+.restaurant-card p strong {
+    color: #2d3748;
+    font-weight: 500;
+}
+
+/* Buttons (Update and Delete) */
+.update-btn,
+.delete-btn {
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.update-btn:hover,
+.delete-btn:hover {
+    background-color: #e35d3a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Edit Form Container */
+.edit-form-container {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 4rem auto;
+}
+
+.edit-form h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+}
+
+.edit-form label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    display: block;
+    font-weight: 500;
+}
+
+/* Form Inputs */
+.edit-form input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+}
+
+.edit-form input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Buttons in Edit Form */
+.submit-btn,
+.cancel-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+.cancel-btn {
+    background-color: #e5e7eb;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+.cancel-btn:hover {
+    background-color: #ccd0d5;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .restaurant-card {
+        padding: 1rem;
+    }
+
+    .edit-form-container {
+        padding: 2rem;
+    }
+
+    .view-restaurants-container {
+        padding: 2rem;
+    }
+
+    .restaurants-list {
+        grid-template-columns: 1fr;
+    }
+}
