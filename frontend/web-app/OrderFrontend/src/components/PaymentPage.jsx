@@ -138,7 +138,8 @@ const styles = {
     maxWidth: '500px',
     margin: '0 auto',
     padding: '20px',
-    fontFamily: 'Arial, sans-serif'
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#fff5e6'// Light orange background for the entire page
   },
   header: {
     textAlign: 'center',
@@ -154,7 +155,7 @@ const styles = {
     width: '350px',
     height: '220px',
     borderRadius: '10px',
-    background: 'linear-gradient(45deg, #6772e5, #7795f8)',
+    background: 'linear-gradient(45deg,rgb(2, 3, 15), #7795f8)',
     color: 'white',
     padding: '20px',
     boxShadow: '0 4px 6px rgba(50, 50, 93, 0.11)',
@@ -179,7 +180,7 @@ const styles = {
     fontSize: '14px'
   },
   form: {
-    backgroundColor: '#f6f9fc',
+    backgroundColor: '#fff5e6', // Light orange background for form
     padding: '20px',
     borderRadius: '8px'
   },
@@ -201,7 +202,7 @@ const styles = {
   submitButton: {
     width: '100%',
     padding: '12px',
-    backgroundColor: '#6772e5',
+    backgroundColor: '#e66142',
     color: 'white',
     border: 'none',
     borderRadius: '4px',

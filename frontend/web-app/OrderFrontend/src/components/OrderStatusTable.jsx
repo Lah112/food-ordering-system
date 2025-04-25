@@ -92,95 +92,239 @@ function OrderStatusTable({ orders, onOrderUpdate }) {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Your Orders</h2>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Restaurant</th>
-            <th style={styles.th}>Items</th>
-            <th style={styles.th}>Total</th>
-            <th style={styles.th}>Status</th>
-            <th style={styles.th}>Date</th>
-            <th style={styles.th}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map(order => (
-            <tr key={order._id} style={styles.tr}>
-              <td style={styles.td}>{order.restaurant?.name || 'Unknown'}</td>
-              <td style={styles.td}>
-                <ul style={styles.list}>
-                  {order.items.map((item, idx) => (
-                    <li key={idx} style={styles.listItem}>
-                      {item.quantity}x {item.name} (${item.price.toFixed(2)})
-                    </li>
-                  ))}
-                </ul>
-              </td>
-              <td style={styles.td}>${order.totalAmount.toFixed(2)}</td>
-              <td style={styles.td}>
-                <span style={getStatusStyle(order.status)}>
-                  {order.status}
-                </span>
-              </td>
-              <td style={styles.td}>
-                {new Date(order.placedAt).toLocaleString()}
-              </td>
-              <td style={styles.td}>
-                {order.status === 'Pending' && (
-                  <>
-                    <button onClick={() => handleEditClick(order)} style={styles.editButton}>
-                      Edit
-                    </button>
+      <div style={styles.header}>
+        <img 
+          src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" 
+          alt="Orders" 
+          style={styles.headerIcon}
+        />
+        <h2 style={styles.title}>Your Order History</h2>
+      </div>
+      
+      {orders.length === 0 ? (
+        <div style={styles.emptyState}>
+          <img 
+            src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" 
+            alt="No orders" 
+            style={styles.emptyStateIcon}
+          />
+          <h3 style={styles.emptyStateTitle}>No Orders Found</h3>
+          <p style={styles.emptyStateText}>You haven't placed any orders yet</p>
+        </div>
+      ) : (
+        <div style={styles.tableContainer}>
+          <table style={styles.table}>
+            <thead>
+              <tr style={styles.tableHeaderRow}>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2784/2784487.png" alt="Restaurant" style={styles.headerIconSmall} />
+                    <span>Restaurant</span>
+                  </div>
+                </th>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
                     
-                    <button
-                      onClick={() => handleDeleteOrder(order._id)}
-                      style={{ ...styles.editButton, backgroundColor: '#dc3545', marginLeft: '10px' }}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                    <span> 🍔 Items</span>
+                  </div>
+                </th>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
+                    
+                    <span>💵 Total</span>
+                  </div>
+                </th>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
+                    
+                    <span>⏳ Status</span>
+                  </div>
+                </th>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
+                    
+                    <span>📆 Date & Time</span>
+                  </div>
+                </th>
+                <th style={styles.tableHeader}>
+                  <div style={styles.headerCell}>
+                    
+                    <span>Edit or Delete</span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map(order => (
+                <tr key={order._id} style={styles.tableRow}>
+                  <td style={styles.tableCell}>
+                    <div style={styles.restaurantCell}>
+                      <img 
+                        src={order.restaurant?.image || 'https://cdn-icons-png.flaticon.com/512/2784/2784487.png'} 
+                        alt={order.restaurant?.name} 
+                        style={styles.restaurantImage}
+                      />
+                      <span>{order.restaurant?.name || 'Unknown'}</span>
+                    </div>
+                  </td>
+                  <td style={styles.tableCell}>
+                    <ul style={styles.itemsList}>
+                      {order.items.map((item, idx) => (
+                        <li key={idx} style={styles.item}>
+                          <span style={styles.itemQuantity}>{item.quantity}x</span>
+                          <span style={styles.itemName}>{item.name}</span>
+                          <span style={styles.itemPrice}>Rs.{item.price.toFixed(2)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td style={styles.tableCell}>
+                    <span style={styles.totalAmount}>Rs.{order.totalAmount.toFixed(2)}</span>
+                  </td>
+                  <td style={styles.tableCell}>
+                    <span style={getStatusStyle(order.status)}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td style={styles.tableCell}>
+                    {new Date(order.placedAt).toLocaleString()}
+                  </td>
+                  <td style={styles.tableCell}>
+                    {order.status === 'Pending' && (
+                      <div style={styles.actionButtons}>
+                        <button 
+                          onClick={() => handleEditClick(order)} 
+                          style={styles.editButton}
+                        >
+                          <img 
+                            src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" 
+                            alt="Edit" 
+                            style={styles.buttonIcon}
+                          />
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteOrder(order._id)}
+                          style={styles.deleteButton}
+                        >
+                          <img 
+                            src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+                            alt="Delete" 
+                            style={styles.buttonIcon}
+                          />
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {editingOrder && (
-        <div style={styles.modal}>
-          <div style={styles.modalContent}>
-            <h3>Place Your Order</h3>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Delivery Address:</label>
-              <input
-                type="text"
-                value={editedAddress}
-                onChange={(e) => setEditedAddress(e.target.value)}
-                required
-                style={styles.input}
-              />
+        <div style={styles.modalOverlay}>
+          <div style={styles.modal}>
+            <div style={styles.modalHeader}>
+              <h3 style={styles.modalTitle}>Edit Order</h3>
+              <button 
+                onClick={() => setEditingOrder(null)} 
+                style={styles.closeButton}
+              >
+                &times;
+              </button>
             </div>
-            <h4>Items:</h4>
-            <div style={styles.menuItems}>
-              {editedItems.map((item, index) => (
-                <div key={index} style={styles.menuItem}>
-                  <span>{item.name} - ${item.price.toFixed(2)}</span>
-                  <div style={styles.quantityControls}>
-                    <button type="button" onClick={() => handleItemQuantityChange(index, item.quantity - 1)} style={styles.quantityButton}>-</button>
-                    <span style={styles.quantity}>{item.quantity}</span>
-                    <button type="button" onClick={() => handleItemQuantityChange(index, item.quantity + 1)} style={styles.quantityButton}>+</button>
-                    <button onClick={() => handleRemoveItem(index)} style={{ ...styles.quantityButton, backgroundColor: '#ff6b6b' }}>Remove</button>
+            
+            <div style={styles.modalBody}>
+              <div style={styles.formGroup}>
+                <label style={styles.formLabel}>
+                  <img 
+                    src="https://cdn-icons-png.flaticon.com/512/2838/2838694.png" 
+                    alt="Address" 
+                    style={styles.formIcon}
+                  />
+                  Delivery Address
+                </label>
+                <input
+                  type="text"
+                  value={editedAddress}
+                  onChange={(e) => setEditedAddress(e.target.value)}
+                  required
+                  style={styles.formInput}
+                />
+              </div>
+              
+              <h4 style={styles.itemsTitle}>
+                <img 
+                  src="https://cdn-icons-png.flaticon.com/512/3174/3174885.png" 
+                  alt="Items" 
+                  style={styles.sectionIcon}
+                />
+                Order Items
+              </h4>
+              
+              <div style={styles.editItemsContainer}>
+                {editedItems.map((item, index) => (
+                  <div key={index} style={styles.editItem}>
+                    <div style={styles.itemInfo}>
+                      <img 
+                        src={item.image || 'https://cdn-icons-png.flaticon.com/512/1147/1147805.png'} 
+                        alt={item.name} 
+                        style={styles.editItemImage}
+                      />
+                      <div>
+                        <div style={styles.editItemName}>{item.name}</div>
+                        <div style={styles.editItemPrice}>Rs.{item.price.toFixed(2)}</div>
+                      </div>
+                    </div>
+                    <div style={styles.quantityControls}>
+                      <button 
+                        type="button" 
+                        onClick={() => handleItemQuantityChange(index, item.quantity - 1)} 
+                        style={styles.quantityButton}
+                      >
+                        -
+                      </button>
+                      <span style={styles.quantityDisplay}>{item.quantity}</span>
+                      <button 
+                        type="button" 
+                        onClick={() => handleItemQuantityChange(index, item.quantity + 1)} 
+                        style={styles.quantityButton}
+                      >
+                        +
+                      </button>
+                      <button 
+                        onClick={() => handleRemoveItem(index)} 
+                        style={styles.removeButton}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              
+              <div style={styles.totalContainer}>
+                <span style={styles.totalLabel}>Order Total:</span>
+                <span style={styles.totalValue}>Rs.{calculatedTotal.toFixed(2)}</span>
+              </div>
             </div>
-            <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
-              Total: ${calculatedTotal.toFixed(2)}
-            </div>
-            <div style={styles.modalButtons}>
-              <button onClick={() => setEditingOrder(null)} style={styles.cancelButton}>Cancel</button>
-              <button onClick={handleSaveChanges} style={styles.saveButton}>Save Changes</button>
+            
+            <div style={styles.modalFooter}>
+              <button 
+                onClick={() => setEditingOrder(null)} 
+                style={styles.cancelButton}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleSaveChanges} 
+                style={styles.saveButton}
+              >
+                Save Changes
+              </button>
             </div>
           </div>
         </div>
@@ -191,10 +335,10 @@ function OrderStatusTable({ orders, onOrderUpdate }) {
 
 function getStatusStyle(status) {
   const baseStyle = {
-    padding: '4px 8px',
-    borderRadius: '4px',
-    fontSize: '0.9em',
-    fontWeight: 'bold',
+    padding: '6px 12px',
+    borderRadius: '20px',
+    fontSize: '0.85rem',
+    fontWeight: '600',
     display: 'inline-block'
   };
 
@@ -207,136 +351,392 @@ function getStatusStyle(status) {
       return { ...baseStyle, backgroundColor: '#ffe5b4', color: '#8a4b08' };
     case 'delivered':
       return { ...baseStyle, backgroundColor: '#e2d5f9', color: '#5e3e99' };
+    case 'cancelled':
+      return { ...baseStyle, backgroundColor: '#f8d7da', color: '#721c24' };
     default:
-      return baseStyle;
+      return { ...baseStyle, backgroundColor: '#e2e3e5', color: '#383d41' };
   }
 }
 
 const styles = {
   container: {
-    padding: '20px',
-    maxWidth: '1200px',
-    margin: '0 auto'
+    padding: '2rem',
+    maxWidth: '1400px',
+    margin: '0 auto',
+    fontFamily: "'Poppins', sans-serif",
+    backgroundColor: '#fff5e6'
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    marginBottom: '2rem',
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #e0e0e0'
+  },
+  headerIcon: {
+    width: '40px',
+    height: '40px'
   },
   title: {
-    marginBottom: '20px',
-    color: '#333'
+    fontSize: '2rem',
+    fontWeight: '600',
+    margin: 0,
+    color: '#2c3e50'
+  },
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '3rem',
+    textAlign: 'center',
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+  },
+  emptyStateIcon: {
+    width: '100px',
+    height: '100px',
+    marginBottom: '1.5rem',
+    opacity: '0.6'
+  },
+  emptyStateTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    margin: '0 0 0.5rem',
+    color: '#2c3e50'
+  },
+  emptyStateText: {
+    fontSize: '1rem',
+    color: '#7f8c8d',
+    margin: 0
+  },
+  tableContainer: {
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+    overflowX: 'auto'
   },
   table: {
     width: '100%',
-    borderCollapse: 'collapse',
-    backgroundColor: 'white',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    borderCollapse: 'collapse'
   },
-  th: {
-    padding: '12px 15px',
-    backgroundColor: '#f8f9fa',
-    borderBottom: '1px solid #ddd',
-    textAlign: 'left'
+  tableHeaderRow: {
+    backgroundColor: '#f8f9fa'
   },
-  tr: {
-    borderBottom: '1px solid #eee'
+  tableHeader: {
+    padding: '1rem',
+    textAlign: 'left',
+    fontWeight: '600',
+    color: '#495057',
+    borderBottom: '1px solid #e0e0e0'
   },
-  td: {
-    padding: '12px 15px',
+  headerCell: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem'
+  },
+  headerIconSmall: {
+    width: '20px',
+    height: '20px',
+    opacity: '0.7'
+  },
+  tableRow: {
+    borderBottom: '1px solid #f0f0f0',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#f9f9f9'
+    }
+  },
+  tableCell: {
+    padding: '1rem',
     verticalAlign: 'top'
   },
-  list: {
+  restaurantCell: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem'
+  },
+  restaurantImage: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    objectFit: 'cover'
+  },
+  itemsList: {
     margin: 0,
     padding: 0,
     listStyle: 'none'
   },
-  listItem: {
-    marginBottom: '4px'
+  item: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.25rem 0'
+  },
+  itemQuantity: {
+    fontWeight: '600',
+    color: '#e66142'
+  },
+  itemName: {
+    flex: 1
+  },
+  itemPrice: {
+    color: '#6c757d',
+    fontSize: '0.9rem'
+  },
+  totalAmount: {
+    fontWeight: '600',
+    color: '#2c3e50'
+  },
+  actionButtons: {
+    display: 'flex',
+    gap: '0.5rem'
   },
   editButton: {
-    padding: '6px 12px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.25rem',
+    padding: '0.5rem 0.75rem',
     backgroundColor: '#007bff',
     color: 'white',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
     cursor: 'pointer',
-    fontSize: '14px'
+    fontSize: '0.85rem',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#0069d9'
+    }
   },
-  modal: {
+  deleteButton: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.25rem',
+    padding: '0.5rem 0.75rem',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '0.85rem',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#c82333'
+    }
+  },
+  buttonIcon: {
+    width: '16px',
+    height: '16px'
+  },
+  modalOverlay: {
     position: 'fixed',
-    top: 0, left: 0, right: 0, bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000
   },
-  modalContent: {
+  modal: {
     backgroundColor: 'white',
-    padding: '20px',
-    borderRadius: '8px',
-    maxWidth: '600px',
+    borderRadius: '12px',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
     width: '90%',
-    maxHeight: '80vh',
-    overflowY: 'auto'
+    maxWidth: '600px',
+    maxHeight: '90vh',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  modalHeader: {
+    padding: '1.5rem',
+    borderBottom: '1px solid #f0f0f0',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  modalTitle: {
+    margin: 0,
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    color: '#2c3e50'
+  },
+  closeButton: {
+    background: 'none',
+    border: 'none',
+    fontSize: '1.5rem',
+    cursor: 'pointer',
+    color: '#6c757d',
+    padding: '0 0.5rem'
+  },
+  modalBody: {
+    padding: '1.5rem',
+    overflowY: 'auto',
+    flex: 1
   },
   formGroup: {
-    marginBottom: '15px'
+    marginBottom: '1.5rem'
   },
-  label: {
-    display: 'block',
-    marginBottom: '5px',
-    fontWeight: 'bold'
+  formLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    marginBottom: '0.5rem',
+    fontWeight: '500',
+    color: '#495057'
   },
-  input: {
+  formIcon: {
+    width: '20px',
+    height: '20px',
+    opacity: '0.7'
+  },
+  formInput: {
     width: '100%',
-    padding: '8px',
-    border: '1px solid #ddd',
-    borderRadius: '4px'
+    padding: '0.75rem 1rem',
+    border: '1px solid #e0e0e0',
+    borderRadius: '6px',
+    fontSize: '1rem',
+    transition: 'border-color 0.3s',
+    ':focus': {
+      outline: 'none',
+      borderColor: '#007bff'
+    }
   },
-  menuItems: {
-    margin: '15px 0'
+  itemsTitle: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    margin: '1.5rem 0 1rem',
+    color: '#2c3e50'
   },
-  menuItem: {
+  sectionIcon: {
+    width: '24px',
+    height: '24px'
+  },
+  editItemsContainer: {
+    margin: '1rem 0'
+  },
+  editItem: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 0',
-    borderBottom: '1px solid #eee'
+    padding: '1rem 0',
+    borderBottom: '1px solid #f0f0f0'
+  },
+  itemInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    flex: 1
+  },
+  editItemImage: {
+    width: '50px',
+    height: '50px',
+    borderRadius: '8px',
+    objectFit: 'cover'
+  },
+  editItemName: {
+    fontWeight: '500'
+  },
+  editItemPrice: {
+    color: '#e66142',
+    fontWeight: '600',
+    fontSize: '0.9rem'
   },
   quantityControls: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px'
+    gap: '0.5rem'
   },
   quantityButton: {
-    padding: '5px 10px',
-    backgroundColor: '#f0f0f0',
+    width: '30px',
+    height: '30px',
+    backgroundColor: '#f8f9fa',
     border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#e9ecef'
+    }
   },
-  quantity: {
+  quantityDisplay: {
     minWidth: '20px',
     textAlign: 'center'
   },
-  modalButtons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: '10px',
-    marginTop: '20px'
-  },
-  saveButton: {
-    padding: '8px 16px',
-    backgroundColor: '#28a745',
+  removeButton: {
+    padding: '0.5rem 0.75rem',
+    backgroundColor: '#ff6b6b',
     color: 'white',
     border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '0.85rem',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#ff5252'
+    }
+  },
+  totalContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '1.5rem',
+    paddingTop: '1rem',
+    borderTop: '1px solid #f0f0f0'
+  },
+  totalLabel: {
+    fontWeight: '500',
+    fontSize: '1.1rem'
+  },
+  totalValue: {
+    fontWeight: '600',
+    fontSize: '1.2rem',
+    color: '#2c3e50'
+  },
+  modalFooter: {
+    padding: '1.5rem',
+    borderTop: '1px solid #f0f0f0',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '1rem'
   },
   cancelButton: {
-    padding: '8px 16px',
+    padding: '0.75rem 1.5rem',
     backgroundColor: '#6c757d',
     color: 'white',
     border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    fontWeight: '500',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#5a6268'
+    }
+  },
+  saveButton: {
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#28a745',
+    color: 'white',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    fontWeight: '500',
+    transition: 'background-color 0.2s',
+    ':hover': {
+      backgroundColor: '#218838'
+    }
   }
 };
 
