@@ -50,9 +50,18 @@ const StoreContextProvider = (props) => {
     }
 
     const loadCartData = async (token) => {
-        const response = await axios.post(url+"/api/cart/get", {}, {headers:{token}})
-        setCartItems(response.data.cartData)
-    }
+        try {
+          const response = await axios.post(url + "/api/cart/get", {}, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          setCartItems(response.data.cartData);
+        } catch (error) {
+          console.error("Failed to load cart data:", error.response?.data?.message || error.message);
+        }
+      };
+      
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;

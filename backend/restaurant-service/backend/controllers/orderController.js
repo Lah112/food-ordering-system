@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // placing user order for frontend
 const placeOrder = async (req, res) => {
-  const frontend_url = "https://food-delivery-frontend-s2l9.onrender.com";
+  const frontend_url = "http://localhost:5174";
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
@@ -83,18 +83,14 @@ const userOrders = async (req, res) => {
 // Listing orders for admin pannel
 const listOrders = async (req, res) => {
   try {
-    const userData = req.user;
-    if (userData && userData.role === "admin") {
-      const orders = await orderModel.find({});
-      res.json({ success: true, data: orders });
-    } else {
-      res.json({ success: false, message: "You are not admin" });
-    }
+    const orders = await orderModel.find({});
+    res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });
   }
 };
+
 
 // api for updating status
 const updateStatus = async (req, res) => {

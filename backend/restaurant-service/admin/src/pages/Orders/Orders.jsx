@@ -16,7 +16,7 @@ const Orders = ({ url }) => {
 
   const fetchAllOrder = async () => {
     const response = await axios.get(url + "/api/order/list", {
-      
+      headers: { token },
     });
     if (response.data.success) {
       setOrders(response.data.data);
