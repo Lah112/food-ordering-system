@@ -83,7 +83,7 @@ const userOrders = async (req, res) => {
 // Listing orders for admin pannel
 const listOrders = async (req, res) => {
   try {
-    let userData = await userModel.findById(req.body.userId);
+    const userData = req.user;
     if (userData && userData.role === "admin") {
       const orders = await orderModel.find({});
       res.json({ success: true, data: orders });

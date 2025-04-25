@@ -23,6 +23,9 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 
 
+  
+
+
 // db connection
 connectDB();
 
