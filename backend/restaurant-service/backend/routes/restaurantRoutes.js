@@ -3,8 +3,6 @@ import Restaurant from '../models/Restaurant.js';
 
 const router = express.Router();
 
-
-
 // POST: Submit application
 router.post('/apply', async (req, res) => {
   try {
@@ -26,11 +24,37 @@ router.get('/applications', async (req, res) => {
   }
 });
 
+// GET: Approved restaurants
+router.get('/approved', async (req, res) => {
+  const approved = await Restaurant.find({ isApproved: true });
+  res.json(approved);
+});
+
 // PATCH: Approve restaurant
 router.patch('/approve/:id', async (req, res) => {
   try {
     const updated = await Restaurant.findByIdAndUpdate(req.params.id, { isApproved: true }, { new: true });
     res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PATCH: Update restaurant details
+router.patch('/update/:id', async (req, res) => {
+  try {
+    const updatedRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedRestaurant);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE: Remove a restaurant
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const deletedRestaurant = await Restaurant.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Restaurant deleted', data: deletedRestaurant });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
