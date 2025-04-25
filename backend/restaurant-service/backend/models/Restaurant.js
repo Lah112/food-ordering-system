@@ -8,6 +8,7 @@ const restaurantSchema = new mongoose.Schema({
   address: String,
   cuisineType: String,
   isApproved: { type: Boolean, default: false },
+  availability: { type: Boolean, default: true }, // Add this field
   createdAt: { type: Date, default: Date.now }
 });
 
