@@ -11,6 +11,7 @@ import RestaurantApplications from './pages/RestaurantApplications/RestaurantApp
 import AddRestaurant from './pages/RestaurantApplications/AddRestaurant.jsx';
 
 
+
 const App = () => {
 
   const url = import.meta.env.VITE_APP_URL
