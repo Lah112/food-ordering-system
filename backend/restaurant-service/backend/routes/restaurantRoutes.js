@@ -60,4 +60,20 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
+// PATCH: Update restaurant availability
+router.patch('/update-availability/:id', async (req, res) => {
+  try {
+    const { availability } = req.body;  // Expecting { availability: true/false }
+    const updated = await Restaurant.findByIdAndUpdate(
+      req.params.id,
+      { availability },
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 export default router;

@@ -5,8 +5,8 @@ import './ViewRestaurants.css';
 const ViewRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false); // Track editing state
-  const [currentRestaurant, setCurrentRestaurant] = useState(null); // Track the current restaurant being edited
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentRestaurant, setCurrentRestaurant] = useState(null);
 
   useEffect(() => {
     axios.get('/api/restaurants/approved')
@@ -19,13 +19,11 @@ const ViewRestaurants = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Handle update form change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentRestaurant((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Submit update
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
 
@@ -40,13 +38,11 @@ const ViewRestaurants = () => {
     }
   };
 
-  // Update restaurant function
   const handleUpdate = (restaurant) => {
     setIsEditing(true);
-    setCurrentRestaurant(restaurant); // Set restaurant data in the state to be editable
+    setCurrentRestaurant(restaurant);
   };
 
-  // Delete restaurant function
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/api/restaurants/delete/${id}`);
@@ -55,6 +51,18 @@ const ViewRestaurants = () => {
     } catch (err) {
       console.error(err);
       alert('Error deleting restaurant');
+    }
+  };
+
+  const handleToggleAvailability = async (id, currentAvailability) => {
+    try {
+      const response = await axios.patch(`/api/restaurants/update-availability/${id}`, {
+        availability: !currentAvailability
+      });
+      setRestaurants(restaurants.map((rest) => rest._id === id ? response.data : rest));
+    } catch (err) {
+      console.error(err);
+      alert('Error updating availability');
     }
   };
 
@@ -75,6 +83,15 @@ const ViewRestaurants = () => {
               <p><strong>Email:</strong> {rest.email}</p>
               <p><strong>Address:</strong> {rest.address}</p>
               <p><strong>Cuisine:</strong> {rest.cuisineType}</p>
+
+              {/* Availability Toggle */}
+              <div className="availability-toggle">
+                <button
+                  onClick={() => handleToggleAvailability(rest._id, rest.availability)}
+                  className={rest.availability ? 'available-btn' : 'unavailable-btn'}>
+                  {rest.availability ? 'Available' : 'Unavailable'}
+                </button>
+              </div>
 
               {/* Update and Delete Buttons */}
               <button onClick={() => handleUpdate(rest)} className="update-btn">Update</button>

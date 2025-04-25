@@ -181,3 +181,29 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Availability Toggle */
+.availability-toggle {
+    margin-top: 1rem;
+}
+
+.available-btn,
+.unavailable-btn {
+    background-color: #2ecc71; /* Green for Available */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.unavailable-btn {
+    background-color: #e74c3c; /* Red for Unavailable */
+}
+
+.available-btn:hover,
+.unavailable-btn:hover {
+    opacity: 0.8;
+}
+
