@@ -1,4 +1,3 @@
-// frontend/order/src/pages/HomePage.jsx
 import { useState, useEffect } from 'react';
 import RestaurantList from '../components/RestaurantList';
 import LoginForm from '../components/LoginForm';
@@ -23,15 +22,39 @@ function HomePage({ user, setUser }) {
 
   return (
     <div style={styles.container}>
+      {/* Hover styles for links */}
+      <style>
+        {`
+          .header-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+          }
+          .header-link:hover {
+            text-decoration: underline;
+          }
+
+          .admin-link {
+            color: #ffcc00;
+            text-decoration: none;
+            transition: all 0.3s;
+          }
+
+          .admin-link:hover {
+            text-decoration: underline;
+          }
+        `}
+      </style>
+
       <header style={styles.header}>
-        <h1>Food Delivery App</h1>
+        <h1> 🚚🍕 Bojun Food Delivery App</h1>
         {user ? (
           <div style={styles.userControls}>
             <span>Welcome, {user.name}</span>
             {user.isAdmin && (
-              <a href="/admin" style={styles.adminLink}>Admin Panel</a>
+              <a href="/admin" className="admin-link">Admin Panel</a>
             )}
-            <a href="/my-orders" style={styles.link}>My Orders</a>
+            <a href="/my-orders" className="header-link">My Orders</a>
             <button onClick={handleLogout} style={styles.button}>Logout</button>
           </div>
         ) : (
@@ -65,7 +88,7 @@ const styles = {
     paddingBottom: '50px'
   },
   header: {
-    backgroundColor: '#333',
+    backgroundColor: '#e66142',
     color: 'white',
     padding: '20px',
     marginBottom: '30px',
@@ -84,26 +107,11 @@ const styles = {
   },
   button: {
     padding: '8px 15px',
-    backgroundColor: '#4CAF50',
-    color: 'white',
+    backgroundColor: '#f0eb90',
+    color: 'black',
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer'
-  },
-  link: {
-    color: 'white',
-    textDecoration: 'none',
-    ':hover': {
-      textDecoration: 'underline'
-    }
-  },
-  adminLink: {
-    color: '#ffcc00',
-    textDecoration: 'none',
-    marginRight: '10px',
-    ':hover': {
-      textDecoration: 'underline'
-    }
   }
 };
 
