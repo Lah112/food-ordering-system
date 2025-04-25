@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import './ViewRestaurants.css';
 
 const ViewRestaurants = () => {
@@ -26,7 +28,6 @@ const ViewRestaurants = () => {
 
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.patch(`/api/restaurants/update/${currentRestaurant._id}`, currentRestaurant);
       setRestaurants(restaurants.map((rest) => (rest._id === currentRestaurant._id ? response.data : rest)));
@@ -66,9 +67,54 @@ const ViewRestaurants = () => {
     }
   };
 
+  const downloadPDFReport = () => {
+    const doc = new jsPDF();
+    doc.text('Approved Restaurants Report', 14, 20);
+
+    const tableColumn = ['Name', 'Owner', 'Phone', 'Email', 'Address', 'Cuisine', 'Available'];
+    const tableRows = [];
+
+    restaurants.forEach(rest => {
+      const row = [
+        rest.name,
+        rest.ownerName,
+        rest.phone,
+        rest.email,
+        rest.address,
+        rest.cuisineType,
+        rest.availability ? 'Yes' : 'No'
+      ];
+      tableRows.push(row);
+    });
+
+    autoTable(doc, {
+      startY: 30,
+      head: [tableColumn],
+      body: tableRows,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [52, 152, 219] },
+    });
+
+    doc.save('Approved_Restaurants_Report.pdf');
+  };
+
   return (
     <div className="view-restaurants-container">
       <h2>Approved Restaurants</h2>
+
+      <button onClick={downloadPDFReport} style={{
+        padding: '12px 24px',
+        backgroundColor: '#3498db',
+        color: '#fff',
+        borderRadius: '10px',
+        marginBottom: '2rem',
+        border: 'none',
+        fontSize: '1rem',
+        cursor: 'pointer'
+      }}>
+        Download Report
+      </button>
+
       {loading ? (
         <p>Loading...</p>
       ) : restaurants.length === 0 ? (
@@ -84,7 +130,6 @@ const ViewRestaurants = () => {
               <p><strong>Address:</strong> {rest.address}</p>
               <p><strong>Cuisine:</strong> {rest.cuisineType}</p>
 
-              {/* Availability Toggle */}
               <div className="availability-toggle">
                 <button
                   onClick={() => handleToggleAvailability(rest._id, rest.availability)}
@@ -93,7 +138,6 @@ const ViewRestaurants = () => {
                 </button>
               </div>
 
-              {/* Update and Delete Buttons */}
               <button onClick={() => handleUpdate(rest)} className="update-btn">Update</button>
               <button onClick={() => handleDelete(rest._id)} className="delete-btn">Delete</button>
             </div>
@@ -106,58 +150,22 @@ const ViewRestaurants = () => {
           <h3>Edit Restaurant</h3>
           <form onSubmit={handleSubmitUpdate} className="edit-form">
             <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={currentRestaurant.name}
-              onChange={handleInputChange}
-            />
+            <input type="text" id="name" name="name" value={currentRestaurant.name} onChange={handleInputChange} />
 
             <label htmlFor="ownerName">Owner Name</label>
-            <input
-              type="text"
-              id="ownerName"
-              name="ownerName"
-              value={currentRestaurant.ownerName}
-              onChange={handleInputChange}
-            />
+            <input type="text" id="ownerName" name="ownerName" value={currentRestaurant.ownerName} onChange={handleInputChange} />
 
             <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={currentRestaurant.phone}
-              onChange={handleInputChange}
-            />
+            <input type="text" id="phone" name="phone" value={currentRestaurant.phone} onChange={handleInputChange} />
 
             <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={currentRestaurant.email}
-              onChange={handleInputChange}
-            />
+            <input type="email" id="email" name="email" value={currentRestaurant.email} onChange={handleInputChange} />
 
             <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={currentRestaurant.address}
-              onChange={handleInputChange}
-            />
+            <input type="text" id="address" name="address" value={currentRestaurant.address} onChange={handleInputChange} />
 
             <label htmlFor="cuisineType">Cuisine Type</label>
-            <input
-              type="text"
-              id="cuisineType"
-              name="cuisineType"
-              value={currentRestaurant.cuisineType}
-              onChange={handleInputChange}
-            />
+            <input type="text" id="cuisineType" name="cuisineType" value={currentRestaurant.cuisineType} onChange={handleInputChange} />
 
             <button type="submit" className="submit-btn">Save Changes</button>
             <button type="button" className="cancel-btn" onClick={() => setIsEditing(false)}>Cancel</button>
