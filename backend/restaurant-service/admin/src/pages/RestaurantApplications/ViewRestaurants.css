@@ -9,6 +9,7 @@
     border-radius: 12px;
 }
 
+/* Title */
 .view-restaurants-container h2 {
     font-size: 2.5rem;
     font-weight: 600;
@@ -17,7 +18,7 @@
     text-align: center;
 }
 
-/* Restaurant List */
+/* Restaurant List Grid */
 .restaurants-list {
     display: grid;
     gap: 24px;
@@ -29,15 +30,14 @@
     background: #ffffff;
     border-radius: 1.2rem;
     padding: 1.5rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     border: 1px solid #e2e8f0;
-    cursor: pointer;
 }
 
 .restaurant-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .restaurant-card h3 {
@@ -58,11 +58,37 @@
     font-weight: 500;
 }
 
-/* Buttons (Update and Delete) */
+/* Availability Toggle */
+.availability-toggle {
+    margin-top: 1rem;
+}
+
+.available-btn,
+.unavailable-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.unavailable-btn {
+    background-color: #e74c3c;
+}
+
+.available-btn:hover,
+.unavailable-btn:hover {
+    opacity: 0.85;
+}
+
+/* Buttons */
 .update-btn,
 .delete-btn {
-    background-color: #ff7f50;
-    color: white;
     border: none;
     padding: 10px 20px;
     margin-top: 12px;
@@ -75,14 +101,18 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.update-btn:hover,
-.delete-btn:hover {
+.update-btn {
+    background-color: #ff7f50;
+    color: white;
+}
+
+.update-btn:hover {
     background-color: #e35d3a;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .delete-btn {
     background-color: #f44336;
+    color: white;
 }
 
 .delete-btn:hover {
@@ -94,7 +124,7 @@
     background: #ffffff;
     padding: 3rem;
     border-radius: 1.5rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
     max-width: 600px;
     margin: 4rem auto;
 }
@@ -115,7 +145,7 @@
     font-weight: 500;
 }
 
-/* Form Inputs */
+/* Input Fields */
 .edit-form input {
     width: 100%;
     padding: 1rem;
@@ -133,20 +163,22 @@
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Buttons in Edit Form */
+/* Submit and Cancel Buttons */
 .submit-btn,
 .cancel-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
     padding: 1rem 2rem;
     border-radius: 1.5rem;
     cursor: pointer;
-    margin-top: 1.5rem;
     font-size: 1.1rem;
     transition: background-color 0.3s ease;
     width: 100%;
     text-align: center;
+    border: none;
+}
+
+.submit-btn {
+    background-color: #3498db;
+    color: white;
 }
 
 .submit-btn:hover {
@@ -163,7 +195,7 @@
     background-color: #ccd0d5;
 }
 
-/* Responsive Design Adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
     .restaurant-card {
         padding: 1rem;
@@ -181,29 +213,3 @@
         grid-template-columns: 1fr;
     }
 }
-
-/* Availability Toggle */
-.availability-toggle {
-    margin-top: 1rem;
-}
-
-.available-btn,
-.unavailable-btn {
-    background-color: #2ecc71; /* Green for Available */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.unavailable-btn {
-    background-color: #e74c3c; /* Red for Unavailable */
-}
-
-.available-btn:hover,
-.unavailable-btn:hover {
-    opacity: 0.8;
-}
-
