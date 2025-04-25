@@ -38,9 +38,11 @@ const RestaurantApplications = () => {
     }
   };
 
-  const approve = async (id) => {
+  const approve = async (id, phone) => {
     try {
+      // First, approve the restaurant
       await axios.patch(`/api/restaurants/approve/${id}`);
+
       setApplications(applications.filter(app => app._id !== id));
     } catch (err) {
       console.error(err);
@@ -86,7 +88,7 @@ const RestaurantApplications = () => {
               <p><strong>Phone:</strong> {app.phone}</p>
               <p><strong>Address:</strong> {app.address}</p>
               <p><strong>Cuisine:</strong> {app.cuisineType}</p>
-              <button onClick={() => approve(app._id)} className="approve-btn">Approve</button>
+              <button onClick={() => approve(app._id, app.phone)} className="approve-btn">Approve</button>
             </div>
           ))}
         </div>
