@@ -1,3 +1,5 @@
 **/node_modules/
 .qodo
-delivery-service/node_modules/
+delivery-service/node_modules/".env" 
+backend/restaurant-service/.env
+backend/restaurant-service/backend/.env
