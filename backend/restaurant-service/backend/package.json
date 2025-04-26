@@ -21,7 +21,10 @@
     "nodemailer": "^6.10.1",
     "nodemon": "^3.1.4",
     "stripe": "^16.2.0",
+<<<<<<< HEAD
     "twilio": "^5.5.2",
+=======
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
     "validator": "^13.12.0"
   }
 }

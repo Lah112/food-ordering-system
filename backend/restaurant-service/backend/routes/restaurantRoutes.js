@@ -2,16 +2,23 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import Restaurant from '../models/Restaurant.js';
+<<<<<<< HEAD
 import twilio from 'twilio';
+=======
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
 
 dotenv.config(); // Load environment variables
 
 const router = express.Router();
 
+<<<<<<< HEAD
 // Twilio setup for WhatsApp
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // Nodemailer setup for email
+=======
+// Nodemailer setup
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -20,6 +27,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+<<<<<<< HEAD
 // Function to format phone numbers
 const formatPhoneNumber = (number) => {
   // Check if the number already starts with a '+', if not, prepend it
@@ -45,6 +53,8 @@ const sendWhatsAppMessage = async (phoneNumber, message) => {
   }
 };
 
+=======
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
 // POST: Submit application
 router.post('/apply', async (req, res) => {
   try {
@@ -69,11 +79,15 @@ router.post('/apply', async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
+<<<<<<< HEAD
     // Send WhatsApp message using the phone number
     const whatsappMessage = `Hi ${newRestaurant.ownerName},\n\nThank you for applying to register your restaurant, ${newRestaurant.name}, on our platform. Our team will review your application and get back to you shortly.\n\nBest regards, The Team`;
     await sendWhatsAppMessage(newRestaurant.phone, whatsappMessage);  // Use 'phone' here
 
     res.status(201).json({ message: 'Restaurant application submitted, email and WhatsApp sent', data: newRestaurant });
+=======
+    res.status(201).json({ message: 'Restaurant application submitted and email sent', data: newRestaurant });
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
   } catch (err) {
     console.error('Application error:', err);
     res.status(500).json({ error: 'Error submitting application' });
@@ -123,10 +137,13 @@ router.patch('/approve/:id', async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
+<<<<<<< HEAD
     // Send WhatsApp message for approval
     const approvalMessage = `Hi ${updated.ownerName},\n\nWe're happy to inform you that your restaurant ${updated.name} has been approved and is now live on our platform. You can start receiving orders now!\n\nBest regards, The Team`;
     await sendWhatsAppMessage(updated.phone, approvalMessage);  // Use 'phone' here
 
+=======
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
     res.json(updated);
   } catch (err) {
     console.error('Approval error:', err);

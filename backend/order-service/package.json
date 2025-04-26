@@ -15,5 +15,12 @@
     "mongoose": "^8.13.2",
     "nodemailer": "^6.10.1"
   },
+<<<<<<< HEAD
   "type": "module"
+=======
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
 }

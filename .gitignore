@@ -1,3 +1,9 @@
 **/node_modules/
 .qodo
+<<<<<<< HEAD
 delivery-service/node_modules/
+=======
+delivery-service/node_modules/".env" 
+backend/restaurant-service/.env
+backend/restaurant-service/backend/.env
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
