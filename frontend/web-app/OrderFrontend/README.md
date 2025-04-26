@@ -23,3 +23,5 @@ docker run --name foodfront -p 3001:3000 --rm -v /app/node_modules -v ${PWD}:/ap
 
 
 
+
+
