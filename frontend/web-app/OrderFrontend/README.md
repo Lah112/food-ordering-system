@@ -21,6 +21,14 @@ docker build --no-cache -t fr3 .
 
 docker run --name foodfront -p 3001:3000 --rm -v /app/node_modules -v ${PWD}:/app -e CHOKIDAR_USEPOLLING=true fr3
 
+#Download Docker backend
+
+docker pull nethmiumaya5/foodback2:v2 
+
+#Download Docker frontend
+
+docker pull nethmiumaya5/fr3
+
 
 
 
