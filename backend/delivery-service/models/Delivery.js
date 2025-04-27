@@ -1,8 +1,14 @@
 const mongoose = require('mongoose');
 
 const deliverySchema = new mongoose.Schema({
-  orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true },
+  orderId: {  type: mongoose.Schema.Types.Mixed, 
+    default: 1 
+  },
   driverId: { type: mongoose.Schema.Types.ObjectId, ref: 'Driver' },
+  customerId: { 
+    type: String,  
+    default: "1"
+  },
   pickupLocation: { 
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },

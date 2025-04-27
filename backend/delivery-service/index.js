@@ -8,11 +8,22 @@ require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
+
+// Initialize Socket.IO first
 const io = socketIo(server, {
   cors: {
     origin: config.socket.corsOrigin,
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true
+  },
+  pingTimeout: 60000, 
+  pingInterval: 25000 
+});
+
+// Now attach io to requests
+app.use((req, res, next) => {
+  req.io = io;
+  next();
 });
 
 // Middleware
@@ -28,14 +39,12 @@ io.on('connection', (socket) => {
   console.log('New client connected');
   socket.on('joinDeliveryRoom', (deliveryId) => {
     socket.join(deliveryId);
+    console.log(`Client joined delivery room: ${deliveryId}`);
   });
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
 });
-
-// Attach io to requests
-app.set('io', io);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
