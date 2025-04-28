@@ -1,22 +1,54 @@
-.app-download{
-    margin: auto auto;
-    margin-top: 100px;
-    font-size: max(3vw,20px);
+.app-download {
+    margin: 100px auto 0;
+    font-size: max(2.8vw, 22px);
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(to right, #1e1e2f, #2a2a3d);
+    padding: 40px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: 900px;
+    transition: all 0.3s ease-in-out;
 }
-.app-download-platforms{
+
+.app-download:hover {
+    background: linear-gradient(to right, #2b2b44, #3a3a55);
+}
+
+.app-download-platforms {
     display: flex;
     justify-content: center;
-    gap: max(2vw,10px);
-    margin-top: 40px;
+    gap: max(2vw, 20px);
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
-.app-download-platforms img{
-    width: max(30vw,120px);
-    max-width: 180px;
-    transition: 0.5s;
+
+.app-download-platforms img {
+    width: max(25vw, 130px);
+    max-width: 160px;
+    filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.1));
+    transition: transform 0.4s ease, filter 0.4s ease;
     cursor: pointer;
+    border-radius: 12px;
 }
-.app-download-platforms img:hover{
-    transform: scale(1.05);
+
+.app-download-platforms img:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 6px 20px rgba(255, 255, 255, 0.2));
+}
+
+@media (max-width: 768px) {
+    .app-download {
+        font-size: 18px;
+        padding: 30px 15px;
+    }
+
+    .app-download-platforms {
+        gap: 15px;
+    }
+
+    .app-download-platforms img {
+        max-width: 140px;
+    }
 }

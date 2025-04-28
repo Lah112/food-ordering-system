@@ -1,0 +1,26 @@
+{
+  "name": "order",
+  "version": "1.0.0",
+  "description": "Order Management Service",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon -L server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
+    "nodemailer": "^6.10.1"
+  },
+<<<<<<< HEAD
+  "type": "module"
+=======
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+>>>>>>> 92dec8e94b98b3cea47db1238faea41660bcdf9c
+}

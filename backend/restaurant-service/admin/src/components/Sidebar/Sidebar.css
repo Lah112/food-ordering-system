@@ -1,39 +1,107 @@
-.sidebar{
+/* Sidebar Base */
+.sidebar {
     width: 18%;
     min-height: 100vh;
-    border: 1.5px solid #a9a9a9;
-    border-top: 0;
-    font-size: max(1vw,10px);
+    background: #1c1f26; /* Dark background */
+    color: #f1f1f1;
+    font-size: max(1vw, 13px);
+    padding-top: 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
 }
-.sidebar-options{
-    padding-top: 50px;
-    padding-left: 20%;
+
+/* Sidebar Options Container */
+.sidebar-options {
+    padding-top: 40px;
+    padding-left: 15%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
-.sidebar-option{
+
+/* Individual Option */
+.sidebar-option {
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1px solid #a9a9a9;
-    border-right: 0;
-    padding: 8px 10px;
-    border-radius: 3px 0px 0px 3px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #ccc;
     cursor: pointer;
-}
-.sidebar-option.active{
-    background-color: #fff0ed;
-    border-color: tomato;
+    transition: all 0.3s ease;
 }
 
-@media (max-width:900px) {
-    .sidebar-option p{
+.sidebar-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+/* Active State */
+.sidebar-option.active {
+    background-color: #2c2f36;
+    color: #fff;
+    border-left: 3px solid #ff6347; /* tomato color highlight */
+    padding-left: 11px;
+    font-weight: 500;
+}
+
+/* Sub-options container */
+.sidebar-sub-options {
+    margin-left: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Sub-option style */
+.sidebar-sub-option {
+    color: #bbb;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-sub-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.sidebar-sub-option.active {
+    background-color: #2c2f36;
+    color: #fff;
+    font-weight: 500;
+    border-left: 2px solid #ff6347;
+    padding-left: 8px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar-option p {
         display: none;
     }
-}
-@media (max-width:450px) {
-    .sidebar-option img{
-        width: 17px;
+
+    .sidebar-option {
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .sidebar-sub-options {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .sidebar-sub-option {
+        font-size: 0;
+        padding: 8px;
+        text-align: center;
     }
 }
