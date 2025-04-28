@@ -1,35 +1,26 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Cart from "./pages/Cart/Cart";
-import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
-import Footer from "./components/Footer/Footer";
-import LoginPopup from "./components/LoginPopup/LoginPopup";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Verify from "./pages/Verify/Verify";
-import MyOrders from "./pages/MyOrders/MyOrders";
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { SocketProvider } from './context/SocketContext';
+import LoadingSpinner from './components/LoadingSpinner';
 
-const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
+const Driverlogin = lazy(() => import('./components/driverLogin'));
+const CustomerLandingPage = lazy(() => import('./components/CustomerLandingPage'));
+const DriverLandingPage = lazy(() => import('./components/DriverLandingPage'));
+const CustomerApp = lazy(() => import('./components/CustomerApp'));
+const DriverApp = lazy(() => import('./components/DriverApp'));
+
+export default function App() {
   return (
-    <>
-      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
-      <div className="app">
-        <ToastContainer />
-        <Navbar setShowLogin={setShowLogin} />
+    <SocketProvider>
+      <Suspense fallback={<LoadingSpinner fullScreen />}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/verify" element={<Verify />} />
-          <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/" element={<Driverlogin />} />
+          <Route path="/customer" element={<CustomerLandingPage />} />
+          <Route path="/driver" element={<DriverLandingPage />} />
+          <Route path="/track/:deliveryId" element={<CustomerApp />} />
+          <Route path="/driver/:driverId" element={<DriverApp />} />
         </Routes>
-      </div>
-      <Footer />
-    </>
+      </Suspense>
+    </SocketProvider>
   );
-};
-
-export default App;
+}
