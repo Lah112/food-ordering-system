@@ -113,9 +113,7 @@ export default function CustomerLandingPage() {
     <div className="customer-page">
       <header className="page-header">
         <h1 className="page-title">Your Delivery</h1>
-        <Link to="/driver" className="driver-portal-btn">
-          Driver Portal
-        </Link>
+        
       </header>
 
       <main className="delivery-container">

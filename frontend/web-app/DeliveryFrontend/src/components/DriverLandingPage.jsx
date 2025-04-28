@@ -279,15 +279,7 @@ export default function DriverLandingPage() {
 
       <div style={styles.buttonSection}>
         <div style={styles.buttonContainer}>
-          <Link
-            to="/customer"
-            style={{
-              ...styles.btn,
-              ...styles.customerBtn
-            }}
-          >
-            Go to Customer Portal
-          </Link>
+          
 
           {driverDelivery && (
             <Link
