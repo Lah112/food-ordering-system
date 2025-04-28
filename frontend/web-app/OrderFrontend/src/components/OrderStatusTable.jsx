@@ -257,11 +257,7 @@ function OrderStatusTable({ orders, onOrderUpdate }) {
               </div>
               
               <h4 style={styles.itemsTitle}>
-                <img 
-                  src="https://cdn-icons-png.flaticon.com/512/3174/3174885.png" 
-                  alt="Items" 
-                  style={styles.sectionIcon}
-                />
+                
                 Order Items
               </h4>
               
