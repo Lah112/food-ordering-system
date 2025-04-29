@@ -59,5 +59,10 @@ npm run dev
 Docker Deployment
 
 1. Run All Services with Docker
-![Picture1](https://github.com/user-attachments/assets/6d036604-e88b-44f8-8946-4c04e0a6c732)
+
+
+
+
+![Picture1](https://github.com/user-attachments/assets/5580f5bf-aef0-4cfd-a742-f20e3e8d8b40)
+
 
