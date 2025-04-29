@@ -1,0 +1,118 @@
+/* Transactions.css */
+
+/* General Page Styling */
+.transactions-page {
+    padding: 2rem;
+    background-color: #f4f4f9; /* Light, soft background color */
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: #333333; /* Soft black for text */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Transaction Card */
+.transactions-card {
+    width: 100%;
+    max-width: 1200px;
+    background: linear-gradient(145deg, #2c2c54, #1f1f38); /* Soft dark gradient for a classy look */
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+/* Title Styling */
+.transactions-card h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff; /* Soft white text for contrast */
+    text-align: center;
+}
+
+/* Table Styling */
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a2a3b; /* Dark background for the table */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Table Header Styling */
+.transactions-table thead {
+    background-color: #1c1c2d; /* Subtle dark tone for headers */
+}
+
+/* Table Header and Data Styling */
+.transactions-table th,
+.transactions-table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+/* Header Color */
+.transactions-table th {
+    color: #ffcc5c; /* Soft gold for headers */
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Table Data Color */
+.transactions-table td {
+    font-size: 0.95rem;
+    color: #d1d5db; /* Soft grey for text */
+}
+
+/* Table Row Styling */
+.transactions-table tbody tr {
+    border-bottom: 1px solid #f1f1f1; /* Soft light line between rows */
+    transition: background-color 0.2s ease;
+}
+
+/* Hover Effect for Table Row */
+.transactions-table tbody tr:hover {
+    background-color: #4a4a65; /* Slightly lighter on hover */
+}
+
+/* First Column Styling */
+.transactions-table td:first-child {
+    color: #ffcc5c; /* Accent color for first column */
+    font-weight: 500;
+}
+
+/* Scrollbar Styling for Mobile */
+.transactions-card::-webkit-scrollbar {
+    height: 8px;
+}
+
+.transactions-card::-webkit-scrollbar-thumb {
+    background: #ffcc5c; /* Gold scrollbar thumb */
+    border-radius: 8px;
+}
+
+/* Button Styling */
+.download-btn {
+    background-color: #4e73df;  /* Soft blue accent color */
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1.5rem;
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hover Effect for Button */
+.download-btn:hover {
+    background-color: #375a8a; /* Darker blue for hover effect */
+}
+

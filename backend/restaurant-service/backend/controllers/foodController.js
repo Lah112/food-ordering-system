@@ -57,4 +57,24 @@ const removeFood = async (req, res) => {
   }
 }
 
-export { addFood, listFood, removeFood }
+const updateFood = async (req, res) => {
+  const { id, name, category, price } = req.body;
+
+  try {
+    const food = await foodModel.findById(id);
+    if (!food) return res.json({ success: false, message: "Food not found" });
+
+    food.name = name;
+    food.category = category;
+    food.price = price;
+
+    await food.save();
+    res.json({ success: true, message: "Food updated successfully" });
+  } catch (error) {
+    console.log("Error updating food:", error);
+    res.json({ success: false, message: "Update failed" });
+  }
+};
+
+export { addFood, listFood, removeFood, updateFood };
+

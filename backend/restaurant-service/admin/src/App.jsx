@@ -10,6 +10,7 @@ import ManageUsers from './pages/Users/ManageUsers.jsx'
 import RestaurantApplications from './pages/RestaurantApplications/RestaurantApplications.jsx';
 import AddRestaurant from './pages/RestaurantApplications/AddRestaurant.jsx';
 import ViewRestaurants from './pages/RestaurantApplications/ViewRestaurants.jsx';
+import Transactions from './pages/Transactions/Transactions';
 
 const App = () => {
   const url = import.meta.env.VITE_APP_URL;
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/admin/restaurant-applications" element={<RestaurantApplications />} />
           <Route path="/admin/add-restaurant" element={<AddRestaurant />} />
           <Route path="/admin/manage-restaurants" element={<ViewRestaurants />} />
+          <Route path="/admin/transactions" element={<Transactions />} />
         </Routes>
       </div>
     </div>
