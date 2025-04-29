@@ -1,4 +1,4 @@
-# 🍽️ Food Ordering Admin System – Full Deployment Guide
+# 🍽️ Food Ordering  System – Full Deployment Guide
 
 ## 🔧 Prerequisites
 - Node.js (v18+)
@@ -63,6 +63,7 @@ Docker Deployment
 
 
 
-![Picture1](https://github.com/user-attachments/assets/5580f5bf-aef0-4cfd-a742-f20e3e8d8b40)
+
+![Picture1](https://github.com/user-attachments/assets/3d3a16ba-9e6b-4c93-acb7-acbd141cf5a8)
 
 
