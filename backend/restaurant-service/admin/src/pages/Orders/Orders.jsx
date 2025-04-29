@@ -29,6 +29,7 @@ const Orders = ({ url }) => {
       {
         orderId,
         status: event.target.value,
+        
       },
       { headers: { token } }
     );
@@ -41,7 +42,7 @@ const Orders = ({ url }) => {
   };
   useEffect(() => {
     if (!admin && !token) {
-      toast.error("Please Login First");
+      toast.error("Welcome to Bojun.LK");
       navigate("/");
     }
     fetchAllOrder();
@@ -82,7 +83,7 @@ const Orders = ({ url }) => {
               <p className="order-item-phone">{order.address.phone}</p>
             </div>
             <p>Items: {order.items.length}</p>
-            <p>${order.amount}</p>
+            <p>Rs.{order.amount}</p>
             <select
               onChange={(event) => statusHandler(event, order._id)}
               value={order.status}

@@ -1,14 +1,22 @@
+# Node modules
 **/node_modules/
+
+# Environment variables
+**/.env
+
+# Qodo or any other temp/dev files
 .qodo
 
-backend/delivery-service/node_modules/
+# Ignore .env files explicitly (redundancy for safety)
+.env
+".env"
+
+# Specific paths to ignore (backend & frontend)
 backend/delivery-service/.env
-frontend/web-app/DeliveryFrontend/.env
-
-
-delivery-service/node_modules/
-
-delivery-service/node_modules/".env" 
 backend/restaurant-service/.env
 backend/restaurant-service/backend/.env
+frontend/web-app/DeliveryFrontend/.env
 
+# System files (optional)
+.DS_Store
+Thumbs.db

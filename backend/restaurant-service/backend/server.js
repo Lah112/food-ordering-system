@@ -10,6 +10,7 @@ import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 import adminRoutes from './routes/adminRoutes.js';
 import restaurantRoutes from './routes/restaurantRoutes.js';
+import transactionRouter from './routes/transactionRoutes.js'; // Import transaction routes
 
 
 // app config
@@ -35,6 +36,8 @@ app.use("/images", express.static("uploads"))
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 app.use("/api/order", orderRouter)
+app.use("/api/transactions", transactionRouter); // Add transactions route here
+
 
 app.get("/", (req, res)=>{
     res.send("API Working")

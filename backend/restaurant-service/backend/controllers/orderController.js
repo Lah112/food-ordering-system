@@ -57,7 +57,15 @@ const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
   try {
     if (success == "true") {
-      await orderModel.findByIdAndUpdate(orderId, { payment: true });
+      await orderModel.findByIdAndUpdate(orderId, {
+        payment: true,
+        paymentInfo: {
+          id: orderId,            // or if you get paymentId from Stripe, use it here
+          status: "Paid",
+          type: "Stripe",         // or "Card Payment" (hardcoded for now)
+          paidAt: new Date(),
+        }
+      });
       res.json({ success: true, message: "Paid" });
     } else {
       await orderModel.findByIdAndDelete(orderId);
@@ -101,8 +109,8 @@ const updateStatus = async (req, res) => {
         status: req.body.status,
       });
       res.json({ success: true, message: "Status Updated Successfully" });
-    }else{
-      res.json({ success: false, message: "You are not an admin" });
+    }else {
+      res.json({ success: false, message: "Status Updated Successfully" });
     }
   } catch (error) {
     console.log(error);
@@ -110,4 +118,25 @@ const updateStatus = async (req, res) => {
   }
 };
 
-export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };
+// inside orderController.js
+
+const getFinancialReport = async (req, res) => {
+  try {
+    const paidOrders = await orderModel.find({ payment: true });
+
+    const totalRevenue = paidOrders.reduce((acc, order) => acc + order.amount, 0);
+
+    res.status(200).json({
+      success: true,
+      totalRevenue,
+      totalOrders: paidOrders.length,
+      paidOrders,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error" });
+  }
+};
+
+
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus ,getFinancialReport};

@@ -65,15 +65,20 @@ const SideBar = () => {
 
         {showManageRestaurants && (
           <div className='sidebar-sub-options'>
-              <NavLink to='/admin/manage-restaurants' className='sidebar-sub-option'>
-                View Restaurants
-              </NavLink>
-
+            <NavLink to='/admin/manage-restaurants' className='sidebar-sub-option'>
+              View Restaurants
+            </NavLink>
             <NavLink to='/admin/restaurant-applications' className='sidebar-sub-option'>
               New Applications
             </NavLink>
           </div>
         )}
+
+        {/* Transactions (Not inside dropdown) */}
+        <NavLink to='/admin/transactions' className='sidebar-option'>
+          <img src={assets.order_icon} alt="" />
+          <p>Transactions</p>
+        </NavLink>
 
       </div>
     </div>

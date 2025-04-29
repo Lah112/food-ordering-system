@@ -1,6 +1,7 @@
-version: '3.8'
+version: "3.8"
 
 services:
+
   backend:
     build:
       context: ./backend
@@ -48,6 +49,7 @@ services:
     depends_on:
       - delivery-backend 
 
+
   mongo:
     image: mongo
     ports:
@@ -59,9 +61,31 @@ services:
     volumes:
       - mongodb_data:/data/db
 
-      
+
+  admin-backend:
+    build: ./backend/restaurant-service/backend
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+    depends_on:
+      - mongo
+
+  admin-frontend:
+    build: ./backend/restaurant-service/admin
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - admin-backend
+
+  main-frontend:
+    build: ./frontend/web-app/Resturant managment
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    depends_on:
+      - admin-backend
+
 
 volumes:
   mongodb_data:
-  backend_node_modules:
-  frontend_node_modules:

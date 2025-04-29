@@ -1,34 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Outfit;
+    font-family: 'Outfit', sans-serif;
 }
 
-body{
-    min-height: 100vw;
-    background-color: #fcfcfc;
+body {
+    min-height: 100vh;
+    background: 
+        linear-gradient(135deg, #f4f5f9, #e6e9f0, #f8e4a2); /* Soft gradient with a hint of yellow */
+    color: #1e1e2f;
 }
 
-a{
+a {
     text-decoration: none;
     color: inherit;
 }
 
-hr{
+hr {
     border: none;
     height: 1px;
-    background-color: #a9a9a9;
+    background-color: #d1d1d1;
+    margin: 10px 0;
 }
 
-.app-content{
+.app-content {
     display: flex;
+    padding-top: 0; /* Removed padding-top to eliminate the space between sidebar and page top */
+    margin-top: 0; /* Ensure no margin is added to the top */
 }
 
-.flex-col{
+.flex-col {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+/* Optional card or container style to match premium vibe */
+.card {
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    padding: 20px;
+}
+
+/* Shape Divider if you want to use it additionally */
+.custom-shape-divider-top-1745649821 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: -1; /* Behind all content */
+}
+
+.custom-shape-divider-top-1745649821 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-top-1745649821 .shape-fill {
+    fill: #ffffff;
 }
