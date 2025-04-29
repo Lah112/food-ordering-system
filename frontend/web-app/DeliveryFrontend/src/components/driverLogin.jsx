@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const DriverAuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false); // Changed to false to show registration first
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -51,6 +51,15 @@ const DriverAuthPage = () => {
       borderRadius: '6px',
       marginBottom: '24px',
       color: '#e53e3e',
+      fontSize: '14px'
+    },
+    successBox: {
+      backgroundColor: '#f0fff4',
+      borderLeft: '4px solid #48bb78',
+      padding: '12px 16px',
+      borderRadius: '6px',
+      marginBottom: '24px',
+      color: '#2f855a',
       fontSize: '14px'
     },
     formGroup: {
@@ -168,6 +177,7 @@ const DriverAuthPage = () => {
 
     verifyToken();
 
+    // Get location when registration form is shown
     if (!isLogin && navigator.geolocation) {
       setLocationLoading(true);
       navigator.geolocation.getCurrentPosition(
@@ -191,10 +201,10 @@ const DriverAuthPage = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    if (isAuthenticated && !isVerifying) {
+    if (isAuthenticated && !isVerifying && isLogin) {
       navigate('/driver');
     }
-  }, [isAuthenticated, isVerifying, navigate]);
+  }, [isAuthenticated, isVerifying, navigate, isLogin]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -213,12 +223,25 @@ const DriverAuthPage = () => {
 
       const response = await axios.post(endpoint, payload);
 
-      const { token, driverId, email, name } = response.data;
-
-      localStorage.setItem('driverToken', token);
-      localStorage.setItem('driverData', JSON.stringify({ driverId, email, name }));
-
-      setIsAuthenticated(true);
+      if (isLogin) {
+        // For login, store token and navigate to driver page
+        const { token, driverId, email, name } = response.data;
+        localStorage.setItem('driverToken', token);
+        localStorage.setItem('driverData', JSON.stringify({ driverId, email, name }));
+        setIsAuthenticated(true);
+      } else {
+        // For registration, reset form and switch to login view
+        setFormData({
+          email: formData.email, // Keep the email for convenience
+          password: '',
+          name: '',
+          vehicleType: 'car',
+          currentLocation: { lat: 0, lng: 0 }
+        });
+        setIsLogin(true);
+        // Show success message
+        setError('success:Registration successful! Please login with your credentials.');
+      }
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'An error occurred during authentication');
     }
@@ -242,8 +265,8 @@ const DriverAuthPage = () => {
         </h2>
 
         {error && (
-          <div style={styles.errorBox}>
-            <p>{error}</p>
+          <div style={error.startsWith('success:') ? styles.successBox : styles.errorBox}>
+            <p>{error.startsWith('success:') ? error.substring(8) : error}</p>
           </div>
         )}
 
@@ -268,7 +291,7 @@ const DriverAuthPage = () => {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
+              autoComplete={isLogin ? 'current-password' : 'new-password'}
               required
               minLength="6"
               value={formData.password}
@@ -362,7 +385,10 @@ const DriverAuthPage = () => {
           {isLogin ? "Don't have an account?" : "Already have an account?"}
           <button
             type="button"
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setError(''); 
+            }}
             style={styles.toggleButton}
           >
             {isLogin ? 'Create a new account' : 'Sign in instead'}
