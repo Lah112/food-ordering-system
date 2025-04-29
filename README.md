@@ -71,15 +71,12 @@ npm run dev
 
 Running the Application
 
-
-
-![Uploading Picture1.png…]()
-
-
 docker-compose up --build
 
 
 
+
+![Picture1](https://github.com/user-attachments/assets/a1fe1668-c2d4-486b-9f0e-bcde63591914)
 
 
 
