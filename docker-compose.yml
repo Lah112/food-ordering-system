@@ -1,6 +1,55 @@
 version: "3.8"
 
 services:
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    restart: always
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    restart: always
+    depends_on:
+      - backend
+
+  delivery-backend:
+    build:
+      context: ./backend/delivery-service
+      dockerfile: Dockerfile
+    ports:
+    - "5001:3001"
+    restart: always
+    depends_on:
+    - mongo
+
+
+  delivery-frontend: 
+    build:
+      context: ./frontend/web-app/DeliveryFrontend 
+      dockerfile: Dockerfile  
+    ports:
+      - "8080:3000"  
+    restart: always
+    depends_on:
+      - delivery-backend 
+
+
   mongo:
     image: mongo
     ports:
@@ -11,6 +60,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: abc
     volumes:
       - mongodb_data:/data/db
+
 
   admin-backend:
     build: ./backend/restaurant-service/backend
@@ -35,6 +85,7 @@ services:
     restart: unless-stopped
     depends_on:
       - admin-backend
+
 
 volumes:
   mongodb_data:
