@@ -27,6 +27,27 @@ services:
     depends_on:
       - backend
 
+  delivery-backend:
+    build:
+      context: ./backend/delivery-service
+      dockerfile: Dockerfile
+    ports:
+    - "5001:3001"
+    restart: always
+    depends_on:
+    - mongo
+
+
+  delivery-frontend: 
+    build:
+      context: ./frontend/web-app/DeliveryFrontend 
+      dockerfile: Dockerfile  
+    ports:
+      - "8080:3000"  
+    restart: always
+    depends_on:
+      - delivery-backend 
+
   mongo:
     image: mongo
     ports:
@@ -37,6 +58,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: abc
     volumes:
       - mongodb_data:/data/db
+
+      
 
 volumes:
   mongodb_data:
