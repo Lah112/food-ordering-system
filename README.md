@@ -1,52 +1,42 @@
+# 🍽️ Food Ordering Admin System – Full Deployment Guide
 
-Food Ordering Admin System – Full Deployment Guide
-==================================================
+## 🔧 Prerequisites
+- Node.js (v18+)
+- MongoDB (Local or Atlas)
+- Git
+- WhatsApp API Provider (e.g., Twilio)
+- SMTP Email Provider (e.g., Gmail, SendGrid)
+- Cloud Hosting / VPS (e.g., Render, Vercel, Netlify)
+- Docker & Docker Compose  
+  👉 [Install Docker](https://docs.docker.com/get-docker/)
 
+---
 
-Prerequisites
-==============
-Node.js (v18+ recommended)
+## 🚀 Setup & Deployment
 
-MongoDB (local or cloud Atlas cluster)
-
-Git installed
-
-WhatsApp API provider (e.g., Twilio WhatsApp API)
-
-SMTP email provider (e.g., Gmail SMTP, SendGrid, Mailgun)
-
-A server or cloud hosting (VPS, Render, Vercel, Netlify)
-
-Docker installed (https://docs.docker.com/get-docker/)
-
-Docker Compose installed
-
-
-Steps
-=====
-
-1.Clone the Repository
-
+### 1. Clone the Repository
+```bash
 git clone <repository-url>
 cd <repository-folder>
 
-
-2.Install Dependencies
+2.Install Backend Dependencies
 
 cd backend
 npm install
 
 
-3.Configure Environment Variables
+3.Configure Backend .env
+
+Create a .env file in the backend directory:
 
 PORT=5000
-MONGO_URI=your_mongo_db_connection_string
-JWT_SECRET=your_jwt_secret_key
+MONGO_URI=your_mongo_connection
+JWT_SECRET=your_jwt_secret
 EMAIL_USER=your_email@example.com
 EMAIL_PASS=your_email_password
-WHATSAPP_API_URL=your_whatsapp_api_url
+WHATSAPP_API_URL=https://api.whatsapp.com/send
 WHATSAPP_API_KEY=your_whatsapp_api_key
-BASE_CLIENT_URL=http://localhost:3000  # or your deployed frontend URL
+BASE_CLIENT_URL=http://localhost:3000
 
 
 4. Run Backend Locally
@@ -54,29 +44,20 @@ BASE_CLIENT_URL=http://localhost:3000  # or your deployed frontend URL
 npm start
 
 
-5. Frontend Setup
-
-Install Dependencies
+5. Install Frontend Dependencies
 
 cd ../frontend
 npm install
 
 
-6.Run Frontend Locally
+6. Run Frontend Locally
 
 npm run dev
 
+==========================================================================================
 
-7.Dockerfile Setup
+Docker Deployment
 
-Running the Application
-
-docker-compose up --build
-
-
-
+1. Run All Services with Docker
 
 ![Picture1](https://github.com/user-attachments/assets/a1fe1668-c2d4-486b-9f0e-bcde63591914)
-
-
-

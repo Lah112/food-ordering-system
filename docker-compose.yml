@@ -1,11 +1,24 @@
 version: "3.8"
 
 services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nethmiumayapc
+      MONGO_INITDB_ROOT_PASSWORD: abc
+    volumes:
+      - mongodb_data:/data/db
+
   admin-backend:
     build: ./backend/restaurant-service/backend
     ports:
       - "5001:5001"
     restart: unless-stopped
+    depends_on:
+      - mongo
 
   admin-frontend:
     build: ./backend/restaurant-service/admin
@@ -22,3 +35,6 @@ services:
     restart: unless-stopped
     depends_on:
       - admin-backend
+
+volumes:
+  mongodb_data:

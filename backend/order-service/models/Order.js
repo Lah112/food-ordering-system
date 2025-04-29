@@ -5,12 +5,18 @@ const orderSchema = new mongoose.Schema({
   restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
   items: [
     {
-      name: String,
+      name: {
+        type: String,
+        required: true,
+      },
       price: Number,
       quantity: Number,
     },
   ],
-  deliveryAddress: String,
+  deliveryAddress: {
+    type: String,
+    required: true,
+  },
   customerName: String,
   email: String,
   totalAmount: Number,
